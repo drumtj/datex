@@ -52,7 +52,7 @@
       }
 
       setMonth(0);
-      test();
+
 
       function setMonth(month){
         var dateRange = datex.getFullMonthRange(new Date(2018, month, 1), 1, true);
@@ -62,42 +62,13 @@
         var html = [];
 
         dateArray.forEach(function(week){
-          html.push(`<tr>`)
+          html.push("<tr>")
           week.forEach(function(date){
-            html.push(`<td>${date.getDate()}</td>`)
+            html.push("<td>" + date.getDate() + "</td>")
           })
-          html.push(`</tr>`)
+          html.push("</tr>")
         })
         cbody.innerHTML = html.join('');
-      }
-
-      function test(){
-        console.error("getWeekNumber", datex.getWeekNumber(new Date()));
-        console.error("getLastSunday", datex.getLastSunday(new Date()));
-        console.error("getNextSunday", datex.getNextSunday(new Date()));
-        console.error("getOffsetSunday offset 1", datex.getOffsetSunday(new Date(), 1));
-        console.error("getOffsetSunday offset 2", datex.getOffsetSunday(new Date(), 2));
-        console.error("getOffsetSunday offset -2", datex.getOffsetSunday(new Date(), -2));
-        console.error("getWeekRange 180101", datex.getWeekRange(new Date("2018-01-01")));
-        console.error("getWeekRange now", datex.getWeekRange(new Date()));
-        console.error("getWeekRange now splitWeek", datex.getWeekRange(new Date(), 1, true));
-        console.error("getWeekRange now 2 week", datex.getWeekRange(new Date(), 2));
-        console.error("dateOffsetDay offset 3", datex.dateOffsetDay(new Date(), 3));
-        console.error("dateOffsetMonth offset 1", datex.dateOffsetMonth(new Date(), 1));
-        console.error("dateOffsetMonth offset 12", datex.dateOffsetMonth(new Date(), 12));
-        console.error("getMonthRange", datex.getMonthRange(new Date()));
-        console.error("getMonthRange 2 month", datex.getMonthRange(new Date(), 2));
-        console.error("getFullMonthRange", datex.getFullMonthRange(new Date()));
-        console.error("getFirstDayOfMonth", datex.getFirstDayOfMonth(new Date()));
-        console.error("getLastSunday", datex.getLastSunday(datex.getFirstDayOfMonth(new Date())));
-        console.error("getDateStringArray getWeekRange 180101", datex.getDateStringArray(datex.getWeekRange(new Date("2018-01-01"))));
-        console.error("getDateStringArray getWeekRange 1 week", datex.getDateStringArray(datex.getWeekRange(new Date())));
-        console.error("getDateStringArray getWeekRange 2 week", datex.getDateStringArray(datex.getWeekRange(new Date(), 2)));
-        console.error("getDateStringArray getMonthRange 1 month", datex.getDateStringArray(datex.getMonthRange(new Date(), 1)));
-        console.error("getDateStringArray getMonthRange 2 month", datex.getDateStringArray(datex.getMonthRange(new Date(), 2)));
-        console.error("getDateStringArray getFullMonthRange", datex.getDateStringArray(datex.getFullMonthRange(new Date())));
-        console.error("getDateStringArray getFullMonthRange splitWeek", datex.getDateStringArray(datex.getFullMonthRange(new Date(), 1, true)));
-        console.error("getDateArray getFullMonthRange splitWeek", datex.getDateArray(datex.getFullMonthRange(new Date(), 1, true)));
       }
     </script>
   </body>
