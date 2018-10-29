@@ -3,57 +3,214 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="http://summerstyle.github.io/jsonTreeViewer/libs/jsonTree/jsonTree.css"/>
-    <script type="text/javascript" src="http://summerstyle.github.io/jsonTreeViewer/libs/jsonTree/jsonTree.js"></script>
-    <script type="text/javascript" src="datex.js"></script>
+    <script type="text/javascript" src="Datex.js"></script>
   </head>
   <body>
-
-    <div id="container">
-    </div>
-    <script type="text/javascript">
-    var wrapper = document.getElementById("container");
-    var data = datex.getDateStringArray(datex.getWeekRange(new Date(), 32, true));
-    var tree = jsonTree.create(data, wrapper);
-
-    // Expand all (or selected) child nodes of root (optional)
-    tree.expand();
-    // tree.expand(function(node) {
-    //  return node.childNodes.length < 2 || node.label === 'phoneNumbers';
-    // });
-    </script>
     <script type="text/javascript">
 
-      test();
+      var date = new Date();
 
-      function test(){
-        console.error("getWeekNumber", datex.getWeekNumber(new Date()));
-        console.error("getLastSunday", datex.getLastSunday(new Date()));
-        console.error("getNextSunday", datex.getNextSunday(new Date()));
-        console.error("getOffsetSunday offset 1", datex.getOffsetSunday(new Date(), 1));
-        console.error("getOffsetSunday offset 2", datex.getOffsetSunday(new Date(), 2));
-        console.error("getOffsetSunday offset -2", datex.getOffsetSunday(new Date(), -2));
-        console.error("getWeekRange 180101", datex.getWeekRange(new Date("2018-01-01")));
-        console.error("getWeekRange now", datex.getWeekRange(new Date()));
-        console.error("getWeekRange now splitWeek", datex.getWeekRange(new Date(), 1, true));
-        console.error("getWeekRange now 2 week", datex.getWeekRange(new Date(), 2));
-        console.error("dateOffsetDay offset 3", datex.dateOffsetDay(new Date(), 3));
-        console.error("dateOffsetMonth offset 1", datex.dateOffsetMonth(new Date(), 1));
-        console.error("dateOffsetMonth offset 12", datex.dateOffsetMonth(new Date(), 12));
-        console.error("getMonthRange", datex.getMonthRange(new Date()));
-        console.error("getMonthRange 2 month", datex.getMonthRange(new Date(), 2));
-        console.error("getFullMonthRange", datex.getFullMonthRange(new Date()));
-        console.error("getFirstDayOfMonth", datex.getFirstDayOfMonth(new Date()));
-        console.error("getLastSunday", datex.getLastSunday(datex.getFirstDayOfMonth(new Date())));
-        console.error("getDateStringArray getWeekRange 180101", datex.getDateStringArray(datex.getWeekRange(new Date("2018-01-01"))));
-        console.error("getDateStringArray getWeekRange 1 week", datex.getDateStringArray(datex.getWeekRange(new Date())));
-        console.error("getDateStringArray getWeekRange 2 week", datex.getDateStringArray(datex.getWeekRange(new Date(), 2)));
-        console.error("getDateStringArray getMonthRange 1 month", datex.getDateStringArray(datex.getMonthRange(new Date(), 1)));
-        console.error("getDateStringArray getMonthRange 2 month", datex.getDateStringArray(datex.getMonthRange(new Date(), 2)));
-        console.error("getDateStringArray getFullMonthRange", datex.getDateStringArray(datex.getFullMonthRange(new Date())));
-        console.error("getDateStringArray getFullMonthRange splitWeek", datex.getDateStringArray(datex.getFullMonthRange(new Date(), 1, true)));
-        console.error("getDateArray getFullMonthRange splitWeek", datex.getDateArray(datex.getFullMonthRange(new Date(), 1, true)));
-      }
+      console.log('date ->', date);
+      console.error("static usecase");
+      console.group("static usecase");
+        console.group("property");
+          console.log('Datex.dayms; ->', Datex.dayms);
+          console.log('Datex.timezoneOffset; ->', Datex.timezoneOffset);
+        console.groupEnd("property");
+
+        console.group("get");
+          console.log('Datex.getResetTime(date); ->', Datex.getResetTime(date));
+          console.log('Datex.getSimpleDateString(date); ->', Datex.getSimpleDateString(date));
+          console.log('Datex.getDayName(date); ->', Datex.getDayName(date)); //Monday
+          console.log('Datex.getDayName(date, true); ->', Datex.getDayName(date, true)); //Mon
+          console.log('Datex.getDayName(date, false, "ko"); ->', Datex.getDayName(date, false, "ko")); //월요일
+          console.log('Datex.getDayName(date, true, "ko"); ->', Datex.getDayName(date, true, "ko")); //월
+          console.log('Datex.getUTCDayName(date); ->', Datex.getUTCDayName(date)); //Monday
+          console.log('Datex.getMonthName(date); ->', Datex.getMonthName(date)); //October
+          console.log('Datex.getMonthName(date, true); ->', Datex.getMonthName(date, true)); //Oct
+          console.log('Datex.getMonthName(date, false, "ko"); ->', Datex.getMonthName(date, false, "ko")); //10월
+          console.log('Datex.getUTCMonthName(date); ->', Datex.getUTCMonthName(date)); //October
+
+          console.log('Datex.getWeekCount(date); ->', Datex.getWeekCount(date)); //43
+
+          console.log('Datex.getOffset(date, 1); ->', Datex.getOffset(date, 1));
+          console.log('Datex.getOffsetWeek(date, 1); ->', Datex.getOffsetWeek(date, 1));
+          console.log('Datex.getOffsetMonth(date, 1); ->', Datex.getOffsetMonth(date, 1));
+
+          console.log('Datex.getFirstDateOfWeek(date); ->', Datex.getFirstDateOfWeek(date));
+          console.log('Datex.getLastDateOfWeek(date); ->', Datex.getLastDateOfWeek(date));
+          console.log('Datex.getFirstDateOfMonth(date); ->', Datex.getFirstDateOfMonth(date));
+          console.log('Datex.getLastDateOfMonth(date); ->', Datex.getLastDateOfMonth(date));
+
+
+
+
+          console.log('Datex.getWeekRange(date); ->', Datex.getWeekRange(date));
+          console.log('Datex.getWeekRange(date, 1); ->', Datex.getWeekRange(date, 1));
+          console.log('Datex.getWeekRange(date, 1, true); ->', Datex.getWeekRange(date, 1, true));
+
+          console.log('Datex.getMonthRange(date); ->', Datex.getMonthRange(date));
+          console.log('Datex.getMonthRange(date, 1); ->', Datex.getMonthRange(date, 1));
+          console.log('Datex.getMonthRange(date, 1, true); ->', Datex.getMonthRange(date, 1, true));
+
+          console.log('Datex.getFullMonthRange(date); ->', Datex.getFullMonthRange(date));
+          console.log('Datex.getFullMonthRange(date, 1); ->', Datex.getFullMonthRange(date, 1));
+          console.log('Datex.getFullMonthRange(date, 1, true); ->', Datex.getFullMonthRange(date, 1, true));
+
+          var dateRange = Datex.getMonthRange(date, 1, true);
+          console.log('Datex.getTimeArray(dateRange); ->', Datex.getTimeArray(dateRange));
+          console.log('Datex.getDateArray(dateRange); ->', Datex.getDateArray(dateRange));
+          console.log('Datex.getDateStringArray(dateRange); ->', Datex.getDateStringArray(dateRange));
+        console.groupEnd("get");
+
+
+
+
+        console.group("set");
+          date = new Date();
+          console.log('Datex.setOffset(date, 1);');
+          console.log('\t before date ->', date);
+          Datex.setOffset(date, 1);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setOffsetWeek(date, 1);');
+          console.log('\t before date ->', date);
+          Datex.setOffsetWeek(date, 1);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setOffsetMonth(date, 1);');
+          console.log('\t before date ->', date);
+          Datex.setOffsetMonth(date, 1);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setFirstDateOfWeek(date);');
+          console.log('\t before date ->', date);
+          Datex.setFirstDateOfWeek(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setLastDateOfWeek(date);');
+          console.log('\t before date ->', date);
+          Datex.setLastDateOfWeek(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setFirstDateOfMonth(date);');
+          console.log('\t before date ->', date);
+          Datex.setFirstDateOfMonth(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setLastDateOfMonth(date);');
+          console.log('\t before date ->', date);
+          Datex.setLastDateOfMonth(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.timereset(date, 1);');
+          console.log('\t before date ->', date);
+          Datex.timereset(date);
+          console.log('\t after date ->', date);
+        console.groupEnd("set");
+
+        console.group("condition");
+          console.log('Datex.isLeapYear(date); ->', Datex.isLeapYear(date));
+          console.log('Datex.isSunday(date); ->', Datex.isSunday(date));
+          console.log('Datex.isMonday(date); ->', Datex.isMonday(date));
+          console.log('Datex.isTuesday(date); ->', Datex.isTuesday(date));
+          console.log('Datex.isWednesday(date); ->', Datex.isWednesday(date));
+          console.log('Datex.isThursday(date); ->', Datex.isThursday(date));
+          console.log('Datex.isFriday(date); ->', Datex.isFriday(date));
+        console.groupEnd("condition");
+
+      console.groupEnd("static usecase");
+
+
+
+      console.error("instance usecase");
+      console.group("instance usecase");
+        console.group("create instance");
+          console.log('var datex = new Date().toDatex(); ->', new Date().toDatex());
+          console.log('var datex = new Datex(new Date()); ->', new Datex(new Date()));
+        console.groupEnd("create instance");
+
+        var dx = new Date().toDatex();
+        console.group("property");
+          console.log('dx.date; ->', dx.date);
+        console.groupEnd("property");
+
+        console.group("general method");
+          console.log('dx.clone(); ->', dx.clone());
+        console.groupEnd("general method");
+
+        console.group("get");
+          console.log('dx.toSimpleString(); ->', dx.toSimpleString());
+
+          console.log('dx.getDayName(); ->', dx.getDayName()); //Monday
+          console.log('dx.getDayName(true); ->', dx.getDayName(true)); //Mon
+          console.log('dx.getDayName(false, "ko"); ->', dx.getDayName(false, "ko")); //월요일
+          console.log('dx.getDayName(true, "ko"); ->', dx.getDayName(true, "ko")); //월
+          console.log('dx.getUTCDayName(); ->', dx.getUTCDayName()); //Monday
+          console.log('dx.getMonthName(); ->', dx.getMonthName()); //October
+          console.log('dx.getMonthName(true); ->', dx.getMonthName(true)); //Oct
+          console.log('dx.getMonthName(false, "ko"); ->', dx.getMonthName(false, "ko")); //10월
+          console.log('dx.getUTCMonthName(); ->', dx.getUTCMonthName()); //October
+
+          console.log('dx.getWeekCount(); ->', dx.getWeekCount()); //43
+
+          console.log('dx.getOffset(1); ->', dx.getOffset(1));
+          console.log('dx.getOffsetWeek(1); ->', dx.getOffsetWeek(1));
+          console.log('dx.getOffsetMonth(1); ->', dx.getOffsetMonth(1));
+
+          console.log('dx.getFirstDateOfWeek(); ->', dx.getFirstDateOfWeek());
+          console.log('dx.getLastDateOfWeek(); ->', dx.getLastDateOfWeek());
+          console.log('dx.getFirstDateOfMonth(); ->', dx.getFirstDateOfMonth());
+          console.log('dx.getLastDateOfMonth(); ->', dx.getLastDateOfMonth());
+
+          console.log('dx.getWeekRange(); ->', dx.getWeekRange());
+          console.log('dx.getWeekRange(1); ->', dx.getWeekRange(1));
+          console.log('dx.getWeekRange(1, true); ->', dx.getWeekRange(1, true));
+
+          console.log('dx.getMonthRange(); ->', dx.getMonthRange());
+          console.log('dx.getMonthRange(1); ->', dx.getMonthRange(1));
+          console.log('dx.getMonthRange(1, true); ->', dx.getMonthRange(1, true));
+
+          console.log('dx.getFullMonthRange(); ->', dx.getFullMonthRange());
+          console.log('dx.getFullMonthRange(1); ->', dx.getFullMonthRange(1));
+          console.log('dx.getFullMonthRange(1, true); ->', dx.getFullMonthRange(1, true));
+
+          var dateRange = dx.getMonthRange(1, true);
+          console.log('dateRange.toTimeArray(); ->', dateRange.toTimeArray());
+          console.log('dateRange.toDateArray(); ->', dateRange.toDateArray());
+          console.log('dateRange.toDateStringArray(); ->', dateRange.toDateStringArray());
+        console.groupEnd("get");
+
+
+        console.group("set");
+          console.log('dx.setOffset(1); ->', dx.setOffset(1));
+          console.log('dx.setOffsetWeek(1); ->', dx.setOffsetWeek(1));
+          console.log('dx.setOffsetMonth(1); ->', dx.setOffsetMonth(1));
+          console.log('dx.setFirstDateOfWeek(); ->', dx.setFirstDateOfWeek());
+          console.log('dx.setLastDateOfWeek(); ->', dx.setLastDateOfWeek());
+          console.log('dx.setFirstDateOfMonth(); ->', dx.setFirstDateOfMonth());
+          console.log('dx.setLastDateOfMonth(); ->', dx.setLastDateOfMonth());
+          console.log('dx.timereset(1); ->', dx.timereset(1));
+        console.groupEnd("set");
+
+        console.group("condition");
+          console.log('dx.isLeapYear(); ->', dx.isLeapYear());
+          console.log('dx.isSunday(); ->', dx.isSunday());
+          console.log('dx.isMonday(); ->', dx.isMonday());
+          console.log('dx.isTuesday(); ->', dx.isTuesday());
+          console.log('dx.isWednesday(); ->', dx.isWednesday());
+          console.log('dx.isThursday(); ->', dx.isThursday());
+          console.log('dx.isFriday(); ->', dx.isFriday());
+        console.groupEnd("condition");
+      console.groupEnd("instance usecase");
+
     </script>
   </body>
 </html>

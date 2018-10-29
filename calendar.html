@@ -10,6 +10,12 @@
       .calendar>thead>tr>th:last-child, .calendar>tbody>tr>td:last-child{
         color: blue;
       }
+      .cell {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+
+      }
     </style>
     <script type="text/javascript" src="datex.js"></script>
   </head>
@@ -53,18 +59,13 @@
 
       setMonth(0);
 
-
       function setMonth(month){
-        var dateRange = datex.getFullMonthRange(new Date(2018, month, 1), 1, true);
-        var dateArray = datex.getDateArray(dateRange);
-        console.error("dateRange", dateRange);
-        console.error("dateArray", dateArray);
         var html = [];
 
-        dateArray.forEach(function(week){
+        new Date(2018, month, 1).toDatex().getFullMonthRange(1, true).toDateArray().forEach(function(week){
           html.push("<tr>")
           week.forEach(function(date){
-            html.push("<td>" + date.getDate() + "</td>")
+            html.push('<td class="cell">' + date.getDate() + '</td>')
           })
           html.push("</tr>")
         })
