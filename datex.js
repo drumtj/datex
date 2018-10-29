@@ -309,6 +309,102 @@ var Datex = (function () {
     Datex.getFirstDateOfWeek = function (date) {
         return Datex.setFirstDateOfWeek(new Date(date.getTime()));
     };
+    Datex.prototype.setSunday = function () {
+        Datex.setFirstDateOfWeek(this.date);
+        return this;
+    };
+    Datex.prototype.getSunday = function () {
+        return this.clone().setFirstDateOfWeek();
+    };
+    Datex.setSunday = function (date) {
+        return Datex.setFirstDateOfWeek(date);
+    };
+    Datex.getSunday = function (date) {
+        return Datex.getFirstDateOfWeek(date);
+    };
+    Datex.prototype.setMonday = function () {
+        Datex.setMonday(this.date);
+        return this;
+    };
+    Datex.prototype.getMonday = function () {
+        return this.clone().setMonday();
+    };
+    Datex.setMonday = function (date) {
+        Datex.setOffset(Datex.setFirstDateOfWeek(date), 1);
+        return date;
+    };
+    Datex.getMonday = function (date) {
+        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 1);
+    };
+    Datex.prototype.setTuesday = function () {
+        Datex.setTuesday(this.date);
+        return this;
+    };
+    Datex.prototype.getTuesday = function () {
+        return this.clone().setTuesday();
+    };
+    Datex.setTuesday = function (date) {
+        Datex.setOffset(Datex.setFirstDateOfWeek(date), 2);
+        return date;
+    };
+    Datex.getTuesday = function (date) {
+        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 2);
+    };
+    Datex.prototype.setWednesday = function () {
+        Datex.setWednesday(this.date);
+        return this;
+    };
+    Datex.prototype.getWednesday = function () {
+        return this.clone().setWednesday();
+    };
+    Datex.setWednesday = function (date) {
+        Datex.setOffset(Datex.setFirstDateOfWeek(date), 3);
+        return date;
+    };
+    Datex.getWednesday = function (date) {
+        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 3);
+    };
+    Datex.prototype.setThursday = function () {
+        Datex.setThursday(this.date);
+        return this;
+    };
+    Datex.prototype.getThursday = function () {
+        return this.clone().setThursday();
+    };
+    Datex.setThursday = function (date) {
+        Datex.setOffset(Datex.setFirstDateOfWeek(date), 4);
+        return date;
+    };
+    Datex.getThursday = function (date) {
+        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 4);
+    };
+    Datex.prototype.setFriday = function () {
+        Datex.setFriday(this.date);
+        return this;
+    };
+    Datex.prototype.getFriday = function () {
+        return this.clone().setFriday();
+    };
+    Datex.setFriday = function (date) {
+        Datex.setOffset(Datex.setFirstDateOfWeek(date), 5);
+        return date;
+    };
+    Datex.getFriday = function (date) {
+        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 5);
+    };
+    Datex.prototype.setSaturday = function () {
+        Datex.setLastDateOfWeek(this.date);
+        return this;
+    };
+    Datex.prototype.getSaturday = function () {
+        return this.clone().setLastDateOfWeek();
+    };
+    Datex.setSaturday = function (date) {
+        return Datex.setLastDateOfWeek(date);
+    };
+    Datex.getSaturday = function (date) {
+        return Datex.getLastDateOfWeek(date);
+    };
     Datex.prototype.setLastDateOfWeek = function () {
         Datex.setLastDateOfWeek(this.date);
         return this;

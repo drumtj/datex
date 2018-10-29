@@ -9,7 +9,7 @@ interface DateRange{
 
 
 class Datex {
-
+  
   date: Date;
   timezoneOffset: number;
   static daynames = {
@@ -415,6 +415,132 @@ class Datex {
 
   static getFirstDateOfWeek(date:Date): Date {
     return Datex.setFirstDateOfWeek(new Date(date.getTime()));
+  }
+
+  setSunday(): Datex {
+    Datex.setFirstDateOfWeek(this.date);
+    return this;
+  }
+
+  getSunday(): Datex {
+    return this.clone().setFirstDateOfWeek();
+  }
+
+  static setSunday(date:Date): Date {
+    return Datex.setFirstDateOfWeek(date);
+  }
+
+  static getSunday(date:Date): Date {
+    return Datex.getFirstDateOfWeek(date);
+  }
+
+  setMonday(): Datex {
+    Datex.setMonday(this.date);
+    return this;
+  }
+
+  getMonday(): Datex {
+    return this.clone().setMonday();
+  }
+
+  static setMonday(date:Date): Date {
+    //date.setDate(date.getDate() - date.getDay() + 1);
+    Datex.setOffset(Datex.setFirstDateOfWeek(date), 1);
+    return date;
+  }
+
+  static getMonday(date:Date): Date {
+    //return new Date(date.getDate() - date.getDay() + 1);
+    return Datex.setOffset(Datex.getFirstDateOfWeek(date), 1);
+  }
+
+  setTuesday(): Datex {
+    Datex.setTuesday(this.date);
+    return this;
+  }
+
+  getTuesday(): Datex {
+    return this.clone().setTuesday();
+  }
+
+  static setTuesday(date:Date): Date {
+    Datex.setOffset(Datex.setFirstDateOfWeek(date), 2);
+    return date;
+  }
+
+  static getTuesday(date:Date): Date {
+    return Datex.setOffset(Datex.getFirstDateOfWeek(date), 2);
+  }
+
+  setWednesday(): Datex {
+    Datex.setWednesday(this.date);
+    return this;
+  }
+
+  getWednesday(): Datex {
+    return this.clone().setWednesday();
+  }
+
+  static setWednesday(date:Date): Date {
+    Datex.setOffset(Datex.setFirstDateOfWeek(date), 3);
+    return date;
+  }
+
+  static getWednesday(date:Date): Date {
+    return Datex.setOffset(Datex.getFirstDateOfWeek(date), 3);
+  }
+
+  setThursday(): Datex {
+    Datex.setThursday(this.date);
+    return this;
+  }
+
+  getThursday(): Datex {
+    return this.clone().setThursday();
+  }
+
+  static setThursday(date:Date): Date {
+    Datex.setOffset(Datex.setFirstDateOfWeek(date), 4);
+    return date;
+  }
+
+  static getThursday(date:Date): Date {
+    return Datex.setOffset(Datex.getFirstDateOfWeek(date), 4);
+  }
+
+  setFriday(): Datex {
+    Datex.setFriday(this.date);
+    return this;
+  }
+
+  getFriday(): Datex {
+    return this.clone().setFriday();
+  }
+
+  static setFriday(date:Date): Date {
+    Datex.setOffset(Datex.setFirstDateOfWeek(date), 5);
+    return date;
+  }
+
+  static getFriday(date:Date): Date {
+    return Datex.setOffset(Datex.getFirstDateOfWeek(date), 5);
+  }
+
+  setSaturday(): Datex {
+    Datex.setLastDateOfWeek(this.date);
+    return this;
+  }
+
+  getSaturday(): Datex {
+    return this.clone().setLastDateOfWeek();
+  }
+
+  static setSaturday(date:Date): Date {
+    return Datex.setLastDateOfWeek(date);
+  }
+
+  static getSaturday(date:Date): Date {
+    return Datex.getLastDateOfWeek(date);
   }
 
   setLastDateOfWeek(): Datex {
