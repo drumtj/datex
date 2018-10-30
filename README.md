@@ -27,13 +27,13 @@ dx.getOffsetWeek(1);
 //offset for month
 dx.getOffsetMonth(1);
 //return first day in week
-dx.getFirstDateOfWeek()
+dx.getFirstDayOfWeek()
 //return first day in month
-dx.getFirstDateOfMonth()
+dx.getFirstDayOfMonth()
 //return last day in week
-dx.getLastDateOfWeek()
+dx.getLastDayOfWeek()
 //return last day in month
-dx.getLastDateOfMonth()
+dx.getLastDayOfMonth()
 
 
 

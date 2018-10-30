@@ -52,22 +52,22 @@ var Datex = (function () {
         var result;
         if (durationWeek instanceof Date) {
             result = {
-                startDate: Datex.getFirstDateOfMonth(date),
-                endDate: Datex.getLastDateOfWeek(durationWeek)
+                startDate: Datex.getFirstDayOfMonth(date),
+                endDate: Datex.getLastDayOfWeek(durationWeek)
             };
         }
         else {
             durationWeek = durationWeek || 1;
             if (durationWeek > 0) {
                 result = {
-                    startDate: Datex.getFirstDateOfWeek(date),
-                    endDate: Datex.setLastDateOfWeek(Datex.getOffsetWeek(date, durationWeek - 1))
+                    startDate: Datex.getFirstDayOfWeek(date),
+                    endDate: Datex.setLastDayOfWeek(Datex.getOffsetWeek(date, durationWeek - 1))
                 };
             }
             else {
                 result = {
-                    startDate: Datex.setFirstDateOfWeek(Datex.getOffsetWeek(date, durationWeek)),
-                    endDate: Datex.getLastDateOfWeek(date)
+                    startDate: Datex.setFirstDayOfWeek(Datex.getOffsetWeek(date, durationWeek)),
+                    endDate: Datex.getLastDayOfWeek(date)
                 };
             }
         }
@@ -84,14 +84,14 @@ var Datex = (function () {
         var result;
         if (durationMonth < 0) {
             result = {
-                startDate: Datex.setFirstDateOfMonth(Datex.getOffsetMonth(date, durationMonth)),
-                endDate: Datex.getLastDateOfMonth(date)
+                startDate: Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth)),
+                endDate: Datex.getLastDayOfMonth(date)
             };
         }
         else {
             result = {
-                startDate: Datex.getFirstDateOfMonth(date),
-                endDate: Datex.setLastDateOfMonth(Datex.getOffsetMonth(date, durationMonth - 1))
+                startDate: Datex.getFirstDayOfMonth(date),
+                endDate: Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth - 1))
             };
         }
         if (splitWeek) {
@@ -107,14 +107,14 @@ var Datex = (function () {
         var result;
         if (durationMonth < 0) {
             result = {
-                startDate: Datex.setFirstDateOfWeek(Datex.setFirstDateOfMonth(Datex.getOffsetMonth(date, durationMonth))),
-                endDate: Datex.setLastDateOfWeek(Datex.getLastDateOfMonth(date))
+                startDate: Datex.setFirstDayOfWeek(Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth))),
+                endDate: Datex.setLastDayOfWeek(Datex.getLastDayOfMonth(date))
             };
         }
         else {
             result = {
-                startDate: Datex.setFirstDateOfWeek(Datex.getFirstDateOfMonth(date)),
-                endDate: Datex.setLastDateOfWeek(Datex.setLastDateOfMonth(Datex.getOffsetMonth(date, durationMonth - 1)))
+                startDate: Datex.setFirstDayOfWeek(Datex.getFirstDayOfMonth(date)),
+                endDate: Datex.setLastDayOfWeek(Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth - 1)))
             };
         }
         if (splitWeek) {
@@ -125,19 +125,19 @@ var Datex = (function () {
     Datex.splitWeek = function (dateRange) {
         var arr = [], t, et, endDate;
         if (!Datex.isSunday(dateRange.startDate)) {
-            t = Datex.timereset(Datex.getFirstDateOfWeek(dateRange.startDate));
+            t = Datex.timereset(Datex.getFirstDayOfWeek(dateRange.startDate));
         }
         else {
             t = new Date(Datex.getResetTime(dateRange.startDate.getTime()));
         }
         if (!Datex.isSaturday(dateRange.endDate)) {
-            endDate = Datex.timereset(Datex.getLastDateOfWeek(dateRange.endDate));
+            endDate = Datex.timereset(Datex.getLastDayOfWeek(dateRange.endDate));
         }
         else {
             endDate = new Date(Datex.getResetTime(dateRange.endDate.getTime()));
         }
         while (t <= endDate) {
-            et = Datex.getLastDateOfWeek(t);
+            et = Datex.getLastDayOfWeek(t);
             if (et > endDate) {
                 et = endDate;
             }
@@ -145,7 +145,7 @@ var Datex = (function () {
                 startDate: t,
                 endDate: et
             });
-            t = Datex.setFirstDateOfWeek(Datex.getOffset(t, 7));
+            t = Datex.setFirstDayOfWeek(Datex.getOffset(t, 7));
         }
         dateRange["weeks"] = arr;
         return dateRange;
@@ -295,32 +295,32 @@ var Datex = (function () {
     Datex.getOffsetMonth = function (date, month) {
         return Datex.setOffsetMonth(new Date(date.getTime()), month);
     };
-    Datex.prototype.setFirstDateOfWeek = function () {
-        Datex.setFirstDateOfWeek(this.date);
+    Datex.prototype.setFirstDayOfWeek = function () {
+        Datex.setFirstDayOfWeek(this.date);
         return this;
     };
-    Datex.prototype.getFirstDateOfWeek = function () {
-        return this.clone().setFirstDateOfWeek();
+    Datex.prototype.getFirstDayOfWeek = function () {
+        return this.clone().setFirstDayOfWeek();
     };
-    Datex.setFirstDateOfWeek = function (date) {
+    Datex.setFirstDayOfWeek = function (date) {
         date.setDate(date.getDate() - date.getDay());
         return date;
     };
-    Datex.getFirstDateOfWeek = function (date) {
-        return Datex.setFirstDateOfWeek(new Date(date.getTime()));
+    Datex.getFirstDayOfWeek = function (date) {
+        return Datex.setFirstDayOfWeek(new Date(date.getTime()));
     };
     Datex.prototype.setSunday = function () {
-        Datex.setFirstDateOfWeek(this.date);
+        Datex.setFirstDayOfWeek(this.date);
         return this;
     };
     Datex.prototype.getSunday = function () {
-        return this.clone().setFirstDateOfWeek();
+        return this.clone().setFirstDayOfWeek();
     };
     Datex.setSunday = function (date) {
-        return Datex.setFirstDateOfWeek(date);
+        return Datex.setFirstDayOfWeek(date);
     };
     Datex.getSunday = function (date) {
-        return Datex.getFirstDateOfWeek(date);
+        return Datex.getFirstDayOfWeek(date);
     };
     Datex.prototype.setMonday = function () {
         Datex.setMonday(this.date);
@@ -330,11 +330,11 @@ var Datex = (function () {
         return this.clone().setMonday();
     };
     Datex.setMonday = function (date) {
-        Datex.setOffset(Datex.setFirstDateOfWeek(date), 1);
+        Datex.setOffset(Datex.setFirstDayOfWeek(date), 1);
         return date;
     };
     Datex.getMonday = function (date) {
-        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 1);
+        return Datex.setOffset(Datex.getFirstDayOfWeek(date), 1);
     };
     Datex.prototype.setTuesday = function () {
         Datex.setTuesday(this.date);
@@ -344,11 +344,11 @@ var Datex = (function () {
         return this.clone().setTuesday();
     };
     Datex.setTuesday = function (date) {
-        Datex.setOffset(Datex.setFirstDateOfWeek(date), 2);
+        Datex.setOffset(Datex.setFirstDayOfWeek(date), 2);
         return date;
     };
     Datex.getTuesday = function (date) {
-        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 2);
+        return Datex.setOffset(Datex.getFirstDayOfWeek(date), 2);
     };
     Datex.prototype.setWednesday = function () {
         Datex.setWednesday(this.date);
@@ -358,11 +358,11 @@ var Datex = (function () {
         return this.clone().setWednesday();
     };
     Datex.setWednesday = function (date) {
-        Datex.setOffset(Datex.setFirstDateOfWeek(date), 3);
+        Datex.setOffset(Datex.setFirstDayOfWeek(date), 3);
         return date;
     };
     Datex.getWednesday = function (date) {
-        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 3);
+        return Datex.setOffset(Datex.getFirstDayOfWeek(date), 3);
     };
     Datex.prototype.setThursday = function () {
         Datex.setThursday(this.date);
@@ -372,11 +372,11 @@ var Datex = (function () {
         return this.clone().setThursday();
     };
     Datex.setThursday = function (date) {
-        Datex.setOffset(Datex.setFirstDateOfWeek(date), 4);
+        Datex.setOffset(Datex.setFirstDayOfWeek(date), 4);
         return date;
     };
     Datex.getThursday = function (date) {
-        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 4);
+        return Datex.setOffset(Datex.getFirstDayOfWeek(date), 4);
     };
     Datex.prototype.setFriday = function () {
         Datex.setFriday(this.date);
@@ -386,66 +386,66 @@ var Datex = (function () {
         return this.clone().setFriday();
     };
     Datex.setFriday = function (date) {
-        Datex.setOffset(Datex.setFirstDateOfWeek(date), 5);
+        Datex.setOffset(Datex.setFirstDayOfWeek(date), 5);
         return date;
     };
     Datex.getFriday = function (date) {
-        return Datex.setOffset(Datex.getFirstDateOfWeek(date), 5);
+        return Datex.setOffset(Datex.getFirstDayOfWeek(date), 5);
     };
     Datex.prototype.setSaturday = function () {
-        Datex.setLastDateOfWeek(this.date);
+        Datex.setLastDayOfWeek(this.date);
         return this;
     };
     Datex.prototype.getSaturday = function () {
-        return this.clone().setLastDateOfWeek();
+        return this.clone().setLastDayOfWeek();
     };
     Datex.setSaturday = function (date) {
-        return Datex.setLastDateOfWeek(date);
+        return Datex.setLastDayOfWeek(date);
     };
     Datex.getSaturday = function (date) {
-        return Datex.getLastDateOfWeek(date);
+        return Datex.getLastDayOfWeek(date);
     };
-    Datex.prototype.setLastDateOfWeek = function () {
-        Datex.setLastDateOfWeek(this.date);
+    Datex.prototype.setLastDayOfWeek = function () {
+        Datex.setLastDayOfWeek(this.date);
         return this;
     };
-    Datex.prototype.getLastDateOfWeek = function () {
-        return this.clone().setLastDateOfWeek();
+    Datex.prototype.getLastDayOfWeek = function () {
+        return this.clone().setLastDayOfWeek();
     };
-    Datex.setLastDateOfWeek = function (date) {
+    Datex.setLastDayOfWeek = function (date) {
         date.setDate(date.getDate() + 6 - date.getDay());
         return date;
     };
-    Datex.getLastDateOfWeek = function (date) {
-        return Datex.setLastDateOfWeek(new Date(date.getTime()));
+    Datex.getLastDayOfWeek = function (date) {
+        return Datex.setLastDayOfWeek(new Date(date.getTime()));
     };
-    Datex.prototype.setFirstDateOfMonth = function () {
-        Datex.setFirstDateOfMonth(this.date);
+    Datex.prototype.setFirstDayOfMonth = function () {
+        Datex.setFirstDayOfMonth(this.date);
         return this;
     };
-    Datex.prototype.getFirstDateOfMonth = function () {
-        return this.clone().setFirstDateOfMonth();
+    Datex.prototype.getFirstDayOfMonth = function () {
+        return this.clone().setFirstDayOfMonth();
     };
-    Datex.setFirstDateOfMonth = function (date) {
+    Datex.setFirstDayOfMonth = function (date) {
         date.setDate(1);
         return date;
     };
-    Datex.getFirstDateOfMonth = function (date) {
-        return Datex.setFirstDateOfMonth(new Date(date.getTime()));
+    Datex.getFirstDayOfMonth = function (date) {
+        return Datex.setFirstDayOfMonth(new Date(date.getTime()));
     };
-    Datex.prototype.setLastDateOfMonth = function () {
-        Datex.setLastDateOfMonth(this.date);
+    Datex.prototype.setLastDayOfMonth = function () {
+        Datex.setLastDayOfMonth(this.date);
         return this;
     };
-    Datex.prototype.getLastDateOfMonth = function () {
-        return this.clone().setLastDateOfMonth();
+    Datex.prototype.getLastDayOfMonth = function () {
+        return this.clone().setLastDayOfMonth();
     };
-    Datex.setLastDateOfMonth = function (date) {
+    Datex.setLastDayOfMonth = function (date) {
         Datex.setOffsetMonth(date, 1).setDate(0);
         return date;
     };
-    Datex.getLastDateOfMonth = function (date) {
-        return Datex.setLastDateOfMonth(new Date(date.getTime()));
+    Datex.getLastDayOfMonth = function (date) {
+        return Datex.setLastDayOfMonth(new Date(date.getTime()));
     };
     Datex.prototype.isLeapYear = function () {
         return Datex.isLeapYear(this.date);

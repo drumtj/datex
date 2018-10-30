@@ -37,12 +37,18 @@
           console.log('Datex.getOffsetWeek(date, 1); ->', Datex.getOffsetWeek(date, 1));
           console.log('Datex.getOffsetMonth(date, 1); ->', Datex.getOffsetMonth(date, 1));
 
-          console.log('Datex.getFirstDateOfWeek(date); ->', Datex.getFirstDateOfWeek(date));
-          console.log('Datex.getLastDateOfWeek(date); ->', Datex.getLastDateOfWeek(date));
-          console.log('Datex.getFirstDateOfMonth(date); ->', Datex.getFirstDateOfMonth(date));
-          console.log('Datex.getLastDateOfMonth(date); ->', Datex.getLastDateOfMonth(date));
+          console.log('Datex.getFirstDayOfWeek(date); ->', Datex.getFirstDayOfWeek(date));
+          console.log('Datex.getLastDayOfWeek(date); ->', Datex.getLastDayOfWeek(date));
+          console.log('Datex.getFirstDayOfMonth(date); ->', Datex.getFirstDayOfMonth(date));
+          console.log('Datex.getLastDayOfMonth(date); ->', Datex.getLastDayOfMonth(date));
 
-
+          console.log('Datex.getSunday(date); ->', Datex.getSunday(date));
+          console.log('Datex.getMonday(date); ->', Datex.getMonday(date));
+          console.log('Datex.getTuesday(date); ->', Datex.getTuesday(date));
+          console.log('Datex.getWednesday(date); ->', Datex.getWednesday(date));
+          console.log('Datex.getThursday(date); ->', Datex.getThursday(date));
+          console.log('Datex.getFriday(date); ->', Datex.getFriday(date));
+          console.log('Datex.getSaturday(date); ->', Datex.getSaturday(date));
 
 
           console.log('Datex.getWeekRange(date); ->', Datex.getWeekRange(date));
@@ -86,27 +92,69 @@
           console.log('\t after date ->', date);
 
           date = new Date();
-          console.log('Datex.setFirstDateOfWeek(date);');
+          console.log('Datex.setFirstDayOfWeek(date);');
           console.log('\t before date ->', date);
-          Datex.setFirstDateOfWeek(date);
+          Datex.setFirstDayOfWeek(date);
           console.log('\t after date ->', date);
 
           date = new Date();
-          console.log('Datex.setLastDateOfWeek(date);');
+          console.log('Datex.setLastDayOfWeek(date);');
           console.log('\t before date ->', date);
-          Datex.setLastDateOfWeek(date);
+          Datex.setLastDayOfWeek(date);
           console.log('\t after date ->', date);
 
           date = new Date();
-          console.log('Datex.setFirstDateOfMonth(date);');
+          console.log('Datex.setFirstDayOfMonth(date);');
           console.log('\t before date ->', date);
-          Datex.setFirstDateOfMonth(date);
+          Datex.setFirstDayOfMonth(date);
           console.log('\t after date ->', date);
 
           date = new Date();
-          console.log('Datex.setLastDateOfMonth(date);');
+          console.log('Datex.setLastDayOfMonth(date);');
           console.log('\t before date ->', date);
-          Datex.setLastDateOfMonth(date);
+          Datex.setLastDayOfMonth(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setSunday(date);');
+          console.log('\t before date ->', date);
+          Datex.setSunday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setMonday(date);');
+          console.log('\t before date ->', date);
+          Datex.setMonday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setTuesday(date);');
+          console.log('\t before date ->', date);
+          Datex.setTuesday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setWednesday(date);');
+          console.log('\t before date ->', date);
+          Datex.setWednesday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setThursday(date);');
+          console.log('\t before date ->', date);
+          Datex.setThursday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setFriday(date);');
+          console.log('\t before date ->', date);
+          Datex.setFriday(date);
+          console.log('\t after date ->', date);
+
+          date = new Date();
+          console.log('Datex.setSaturday(date);');
+          console.log('\t before date ->', date);
+          Datex.setSaturday(date);
           console.log('\t after date ->', date);
 
           date = new Date();
@@ -165,10 +213,18 @@
           console.log('dx.getOffsetWeek(1); ->', dx.getOffsetWeek(1));
           console.log('dx.getOffsetMonth(1); ->', dx.getOffsetMonth(1));
 
-          console.log('dx.getFirstDateOfWeek(); ->', dx.getFirstDateOfWeek());
-          console.log('dx.getLastDateOfWeek(); ->', dx.getLastDateOfWeek());
-          console.log('dx.getFirstDateOfMonth(); ->', dx.getFirstDateOfMonth());
-          console.log('dx.getLastDateOfMonth(); ->', dx.getLastDateOfMonth());
+          console.log('dx.getFirstDayOfWeek(); ->', dx.getFirstDayOfWeek());
+          console.log('dx.getLastDayOfWeek(); ->', dx.getLastDayOfWeek());
+          console.log('dx.getFirstDayOfMonth(); ->', dx.getFirstDayOfMonth());
+          console.log('dx.getLastDayOfMonth(); ->', dx.getLastDayOfMonth());
+
+          console.log('dx.getSunday(); ->', dx.getSunday());
+          console.log('dx.getMonday(); ->', dx.getMonday());
+          console.log('dx.getTuesday(); ->', dx.getTuesday());
+          console.log('dx.getWednesday(); ->', dx.getWednesday());
+          console.log('dx.getThursday(); ->', dx.getThursday());
+          console.log('dx.getFriday(); ->', dx.getFriday());
+          console.log('dx.getSaturday(); ->', dx.getSaturday());
 
           console.log('dx.getWeekRange(); ->', dx.getWeekRange());
           console.log('dx.getWeekRange(1); ->', dx.getWeekRange(1));
@@ -190,14 +246,23 @@
 
 
         console.group("set");
-          console.log('dx.setOffset(1); ->', dx.setOffset(1));
-          console.log('dx.setOffsetWeek(1); ->', dx.setOffsetWeek(1));
-          console.log('dx.setOffsetMonth(1); ->', dx.setOffsetMonth(1));
-          console.log('dx.setFirstDateOfWeek(); ->', dx.setFirstDateOfWeek());
-          console.log('dx.setLastDateOfWeek(); ->', dx.setLastDateOfWeek());
-          console.log('dx.setFirstDateOfMonth(); ->', dx.setFirstDateOfMonth());
-          console.log('dx.setLastDateOfMonth(); ->', dx.setLastDateOfMonth());
-          console.log('dx.timereset(1); ->', dx.timereset(1));
+          console.log('dx.setOffset(1); ->', dx.clone().setOffset(1));
+          console.log('dx.setOffsetWeek(1); ->', dx.clone().setOffsetWeek(1));
+          console.log('dx.setOffsetMonth(1); ->', dx.clone().setOffsetMonth(1));
+          console.log('dx.setFirstDayOfWeek(); ->', dx.clone().setFirstDayOfWeek());
+          console.log('dx.setLastDayOfWeek(); ->', dx.clone().setLastDayOfWeek());
+          console.log('dx.setFirstDayOfMonth(); ->', dx.clone().setFirstDayOfMonth());
+          console.log('dx.setLastDayOfMonth(); ->', dx.clone().setLastDayOfMonth());
+
+          console.log('dx.setSunday(); ->', dx.clone().setSunday());
+          console.log('dx.setMonday(); ->', dx.clone().setMonday());
+          console.log('dx.setTuesday(); ->', dx.clone().setTuesday());
+          console.log('dx.setWednesday(); ->', dx.clone().setWednesday());
+          console.log('dx.setThursday(); ->', dx.clone().setThursday());
+          console.log('dx.setFriday(); ->', dx.clone().setFriday());
+          console.log('dx.setSaturday(); ->', dx.clone().setSaturday());
+
+          console.log('dx.timereset(1); ->', dx.clone().timereset(1));
         console.groupEnd("set");
 
         console.group("condition");
