@@ -8,7 +8,7 @@ interface DateRange{
 }
 
 
-class Datex {
+export default class Datex {
 
   date: Date;
   timezoneOffset: number;
