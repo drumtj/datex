@@ -3,9 +3,84 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script type="text/javascript" src="Datex.js"></script>
+    <style media="screen">
+    body {
+    background: black;
+    color: white;
+    }
+
+    pre code {
+    font: 11pt/1.25 Monaco, monospace;
+    }
+
+    .debug { color: Snow; }
+    .info  { color: LawnGreen; }
+    .warn  { color: GoldenRod; }
+    .error { color: LightCoral; }
+    </style>
+    <!-- <script type="text/javascript" src="../dist/datex.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/datex@1.0.5/dist/datex.js"></script>
   </head>
   <body>
+    <script>
+      var C = window.console;
+      var console = (function() {
+        var following = false,
+            pre       = document.createElement('pre'),
+            code      = document.createElement('code');
+
+        pre.appendChild(code);
+        document.body.appendChild(pre);
+
+        return {
+          clear:  clear,
+          follow: follow,
+          log:    print.bind(this, 'log'),
+          info:   print.bind(this, 'info'),
+          warn:   print.bind(this, 'warn'),
+          error:  print.bind(this, 'error'),
+          group: name=>C.group(name),
+          groupEnd: name=>C.groupEnd(name)
+        };
+
+        function clear() {
+          C.clear();
+          while (code.hasChildNodes()) {
+            code.removeChild(code.lastChild);
+          }
+        }
+
+        function follow() {
+          following = true;
+        }
+
+        function print(className, object) {
+          var args = Array.prototype.slice.call(arguments, 1),
+              s    = args.map(p=>{
+                if(typeof p !== "string"){
+                  p = JSON.stringify(p, null, 4);
+                }
+                return p;
+              }).join("\n"),
+              span = document.createElement('span'),
+              text = document.createTextNode(s + '\n\n');
+
+          span.setAttribute('class', className);
+          span.appendChild(text);
+          code.appendChild(span);
+
+          C[className](args);
+
+          if (following) {
+            scrollToBottom();
+          }
+        }
+
+        function scrollToBottom() {
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      }());
+      </script>
     <script type="text/javascript">
 
       var date = new Date();
@@ -13,11 +88,6 @@
       console.log('date ->', date);
       console.error("static usecase");
       console.group("static usecase");
-        console.group("property");
-          console.log('Datex.dayms; ->', Datex.dayms);
-          console.log('Datex.timezoneOffset; ->', Datex.timezoneOffset);
-        console.groupEnd("property");
-
         console.group("get");
           console.log('Datex.getResetTime(date); ->', Datex.getResetTime(date));
           console.log('Datex.getSimpleDateString(date); ->', Datex.getSimpleDateString(date));
@@ -64,9 +134,10 @@
           console.log('Datex.getFullMonthRange(date, 1, true); ->', Datex.getFullMonthRange(date, 1, true));
 
           var dateRange = Datex.getMonthRange(date, 1, true);
-          console.log('Datex.getTimeArray(dateRange); ->', Datex.getTimeArray(dateRange));
-          console.log('Datex.getDateArray(dateRange); ->', Datex.getDateArray(dateRange));
-          console.log('Datex.getDateStringArray(dateRange); ->', Datex.getDateStringArray(dateRange));
+          console.log('Datex.getMonthRange(date, 1, true); ->', dateRange);
+          console.log('dateRange.toTimeArray(); ->', dateRange.toTimeArray());
+          console.log('dateRange.toDateArray(); ->', dateRange.toDateArray());
+          console.log('dateRange.toDateStringArray(); ->', dateRange.toDateStringArray());
         console.groupEnd("get");
 
 
@@ -181,15 +252,11 @@
       console.error("instance usecase");
       console.group("instance usecase");
         console.group("create instance");
-          console.log('var datex = new Date().toDatex(); ->', new Date().toDatex());
-          console.log('var datex = new Datex(new Date()); ->', new Datex(new Date()));
+          console.log('var dx = new Date().toDatex(); ->', new Date().toDatex());
+          console.log('var dx = new Datex(); ->', new Datex());
         console.groupEnd("create instance");
 
-        var dx = new Date().toDatex();
-        console.group("property");
-          console.log('dx.date; ->', dx.date);
-        console.groupEnd("property");
-
+        var dx = new Datex();
         console.group("general method");
           console.log('dx.clone(); ->', dx.clone());
         console.groupEnd("general method");

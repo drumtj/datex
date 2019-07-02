@@ -163,8 +163,25 @@ interface DateRange{
 
 export default class Datex extends Date {
 
-  constructor(src){
-    super(src);
+  constructor(year?, month?, date?, hours?, minutes?, seconds?, ms?){
+    // super();
+    if(ms !== undefined){
+      super(year, month, date, hours, minutes, seconds, ms);
+    }else if(seconds !== undefined){
+      super(year, month, date, hours, minutes, seconds);
+    }else if(minutes !== undefined){
+      super(year, month, date, hours, minutes);
+    }else if(hours !== undefined){
+      super(year, month, date, hours);
+    }else if(date !== undefined){
+      super(year, month, date);
+    }else if(month !== undefined){
+      super(year, month);
+    }else if(year !== undefined){
+      super(year);
+    }else{
+      super();
+    }
   }
 
   clone(): Datex{

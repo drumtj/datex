@@ -17,7 +17,8 @@
 
       }
     </style>
-    <script type="text/javascript" src="datex.js"></script>
+    <!-- <script type="text/javascript" src="../dist/datex.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/datex@1.0.5/dist/datex.js"></script>
   </head>
   <body>
     <select id="monthBox">
@@ -62,7 +63,7 @@
       function setMonth(month){
         var html = [];
 
-        new Date(2018, month, 1).toDatex().getFullMonthRange(1, true).toDateArray().forEach(function(week){
+        new Datex("2019", month, 1).getFullMonthRange(1, true).toDateArray().forEach(function(week){
           html.push("<tr>")
           week.forEach(function(date){
             html.push('<td class="cell">' + date.getDate() + '</td>')

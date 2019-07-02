@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "enable-2fa": "npm profile enable-2fa auth-only",
-    "release": "npm run build && np",
+    "release": "npm run build && npm run deploy && np",
     "_release": "npm run build && npm run deploy",
     "deploy": "git add -A && git commit -m 'deploy' && git push origin master",
     "pull": "git pull origin master --allow-unrelated-histories",
@@ -16,8 +16,7 @@
   "keywords": [
     "date",
     "date offset",
-    "date extension",
-    "calendar"
+    "date extension"
   ],
   "homepage": "https://github.com/drumtj/datex",
   "repository": {
