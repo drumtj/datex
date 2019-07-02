@@ -95,3 +95,7 @@ console.log(dateRange.toDateArray());
 ```
 
 Please check the example folder for more [examples](https://github.com/drumtj/datex/tree/master/examples).
+
+## License
+
+MIT
