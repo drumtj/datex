@@ -13,7 +13,7 @@
     font: 11pt/1.25 Monaco, monospace;
     }
 
-    .debug { color: Snow; }
+    .log { color: Snow; }
     .info  { color: LawnGreen; }
     .warn  { color: GoldenRod; }
     .error { color: LightCoral; }
@@ -86,7 +86,7 @@
       var date = new Date();
 
       console.log('date ->', date);
-      console.error("static usecase");
+      console.error("------- static usecase -------");
       console.group("static usecase");
         console.group("get");
           console.log('Datex.getResetTime(date); ->', Datex.getResetTime(date));
@@ -249,7 +249,7 @@
 
 
 
-      console.error("instance usecase");
+      console.error("------- instance usecase -------");
       console.group("instance usecase");
         console.group("create instance");
           console.log('var dx = new Date().toDatex(); ->', new Date().toDatex());
