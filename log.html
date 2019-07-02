@@ -39,8 +39,12 @@
           info:   print.bind(this, 'info'),
           warn:   print.bind(this, 'warn'),
           error:  print.bind(this, 'error'),
-          group: name=>C.group(name),
-          groupEnd: name=>C.groupEnd(name)
+          group: function(name){
+            C.group(name);this.info(`-----------------${name}------------------`);
+          },
+          groupEnd: function(name){
+            C.groupEnd(name);this.info(`-----------------------------------`);
+          }
         };
 
         function clear() {
@@ -86,7 +90,6 @@
       var date = new Date();
 
       console.log('date ->', date);
-      console.error("------- static usecase -------");
       console.group("static usecase");
         console.group("get");
           console.log('Datex.getResetTime(date); ->', Datex.getResetTime(date));
@@ -249,7 +252,6 @@
 
 
 
-      console.error("------- instance usecase -------");
       console.group("instance usecase");
         console.group("create instance");
           console.log('var dx = new Date().toDatex(); ->', new Date().toDatex());
