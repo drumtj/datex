@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .calendar>thead>tr>th:first-child, .calendar>tbody>tr>td:first-child{
+        color: red;
+      }
+      .calendar>thead>tr>th:last-child, .calendar>tbody>tr>td:last-child{
+        color: blue;
+      }
+      .cell {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+
+      }
+    </style>
+    <!-- <script type="text/javascript" src="../dist/datex.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/datex@1.0.5/dist/datex.js"></script>
+  </head>
+  <body>
+    <select id="monthBox">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5">June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </select>
+    <table class="calendar" border="1" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+      <tbody id="cbody">
+      </tbody>
+    </table>
+    <script type="text/javascript">
+      var cbody = document.getElementById("cbody");
+      var monthBox = document.getElementById("monthBox");
+
+      monthBox.onchange = function(){
+        setMonth(this.value);
+      }
+
+      setMonth(0);
+
+      function setMonth(month){
+        var html = [];
+
+        new Datex("2019", month, 1).getFullMonthRange(1, true).toDateArray().forEach(function(week){
+          html.push("<tr>")
+          week.forEach(function(date){
+            html.push('<td class="cell">' + date.getDate() + '</td>')
+          })
+          html.push("</tr>")
+        })
+        cbody.innerHTML = html.join('');
+      }
+    </script>
+  </body>
+</html>
