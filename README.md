@@ -94,4 +94,4 @@ var dateRange = dx.getMonthRange(1, true)
 console.log(dateRange.toDateArray());
 ```
 
-Please check the example folder for more [examples](https://github.com/drumtj/datex/example).
+Please check the example folder for more [examples](https://github.com/drumtj/datex/tree/master/examples).
