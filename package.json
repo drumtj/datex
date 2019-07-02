@@ -5,7 +5,9 @@
   "main": "./dist/datex.umd.js",
   "scripts": {
     "build": "webpack -p",
-    "release": "npm run build && npm version patch --force && git push --tags origin master && npm publish --access=public && npm run deploy",
+    "enable-2fa": "npm profile enable-2fa auth-only",
+    "release":"npm run build && np",
+    "_release": "npm run build && npm version patch --force && git push --tags origin master && npm publish --access=public && npm run deploy",
     "deploy": "git add -A && git commit -m 'deploy' && git push origin master",
     "pull": "git pull origin master --allow-unrelated-histories",
     "deploy_test": "git add -A && git commit -m 'deploy' && git pull origin master --allow-unrelated-histories && git push origin master",
