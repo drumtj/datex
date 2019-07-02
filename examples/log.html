@@ -19,7 +19,7 @@
     .error { color: LightCoral; }
     </style>
     <!-- <script type="text/javascript" src="../dist/datex.js"></script> -->
-    <script type="text/javascript" src="https://unpkg.com/@drumtj/datex@1.0.5/dist/datex.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/datex@1.0.10/dist/datex.js"></script>
   </head>
   <body>
     <script>
@@ -91,6 +91,13 @@
 
       console.log('date ->', date);
       console.group("static usecase");
+        console.group("formater");
+        console.log('Datex.format(date, "DDD MMM DD YYYY hh:mm:ss"); =>', Datex.format(date, "DDD MMM DD YYYY hh:mm:ss"));
+        console.log('Datex.format(date, "DDDD MMMM DD YYYY hh:mm:ss"); =>', Datex.format(date, "DDDD MMMM DD YYYY hh:mm:ss"));
+        console.log('Datex.format(date, "YYYY년 M월 D일 (DDD)"); =>', Datex.format(date, "YYYY년 M월 D일 (DDD)", "ko"));
+        console.log('Datex.format(date, "YYYY년 MM월 DD일 (DDDD)"); =>', Datex.format(date, "YYYY년 MM월 DD일 (DDDD)", "ko"));
+        console.groupEnd("formater");
+
         console.group("get");
           console.log('Datex.getResetTime(date); ->', Datex.getResetTime(date));
           console.log('Datex.getSimpleDateString(date); ->', Datex.getSimpleDateString(date));
@@ -259,13 +266,16 @@
         console.groupEnd("create instance");
 
         var dx = new Datex();
-        console.group("general method");
-          console.log('dx.clone(); ->', dx.clone());
-        console.groupEnd("general method");
+        console.group("formater");
+          console.log('dx.format("DDD MMM DD YYYY hh:mm:ss"); =>', dx.format("DDD MMM DD YYYY hh:mm:ss"));
+          console.log('dx.format("DDDD MMMM DD YYYY hh:mm:ss"); =>', dx.format("DDDD MMMM DD YYYY hh:mm:ss"));
+          console.log('dx.format("YYYY년 M월 D일 (DDD)"); =>', dx.format("YYYY년 M월 D일 (DDD)", "ko"));
+          console.log('dx.format("YYYY년 MM월 DD일 (DDDD)"); =>', dx.format("YYYY년 MM월 DD일 (DDDD)", "ko"));
+        console.groupEnd("formater");
 
         console.group("get");
+          console.log('dx.clone(); ->', dx.clone());
           console.log('dx.toSimpleString(); ->', dx.toSimpleString());
-
           console.log('dx.getDayName(); ->', dx.getDayName()); //Monday
           console.log('dx.getDayName(true); ->', dx.getDayName(true)); //Mon
           console.log('dx.getDayName(false, "ko"); ->', dx.getDayName(false, "ko")); //월요일

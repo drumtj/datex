@@ -24,7 +24,7 @@ $ npm install @drumtj/datex
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/@drumtj/datex@1.0.5/dist/datex.js"></script>
+<script src="https://unpkg.com/@drumtj/datex@1.0.10/dist/datex.js"></script>
 ```
 
 Using amd, commonjS Module
@@ -92,6 +92,13 @@ dx.getMonthRange(1)
 var dateRange = dx.getMonthRange(1, true)
 
 console.log(dateRange.toDateArray());
+
+//format
+dx.format(); //2019-07-02
+dx.format("DDD MMM DD YYYY hh:mm:ss"); // Tue Jul 02 2019 16:22:06
+dx.format("DDDD MMMM DD YYYY hh:mm:ss"); // Tuesday July 02 2019 16:22:06
+dx.format("YYYY년 M월 D일 (DDD)", "ko"); // 2019년 7월 2일 (화)
+dx.format("YYYY년 MM월 DD일 (DDDD)", "ko"); // 2019년 07월 02일 (화요일)
 ```
 
 Please check the example folder for more [examples](https://github.com/drumtj/datex/tree/master/examples).

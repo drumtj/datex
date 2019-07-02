@@ -703,6 +703,31 @@ export default class Datex extends Date {
     return dateRangeWithFunc(result);
   }
 
+
+  static format(date, f="YYYY-MM-DD", lang="en"):string{
+  	return f
+    .replace(/hh/g, ('0' + date.getHours()).substr(-2))
+    .replace(/h/g, date.getHours().toString())
+    .replace(/mm/g, ('0' + date.getMinutes()).substr(-2))
+    .replace(/m/g, date.getMinutes().toString())
+    .replace(/ss/g, ('0' + date.getSeconds()).substr(-2))
+    .replace(/s/g, date.getSeconds().toString())
+  	.replace(/YYYY/g, date.getFullYear().toString())
+  	.replace(/YY/g, (date.getFullYear() % 100).toString())
+  	.replace(/MMMM/g, Datex.getMonthName(date, false, lang))
+  	.replace(/MMM/g, Datex.getMonthName(date, true, lang))
+  	.replace(/MM/g, ('0' + (date.getMonth() + 1)).substr(-2))
+  	.replace(/M/g, (date.getMonth() + 1).toString())
+  	.replace(/DDDD/g, Datex.getDayName(date, false, lang))
+  	.replace(/DDD/g, Datex.getDayName(date, true, lang))
+  	.replace(/DD/g, ('0' + date.getDate()).substr(-2))
+  	.replace(/D/g, date.getDate().toString())
+  }
+
+  format(f?, lang?):string{
+    return Datex.format(this, f, lang)
+  }
+
   /////////////////////////////////////////
   /////////////////////////////////////////
 
