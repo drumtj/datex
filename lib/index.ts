@@ -23,57 +23,7 @@ const monthnames = {
 const dayms = 1000 * 60 * 60 * 24;
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-getMonthRange(durationMonth?:number, doSplitWeek?:boolean): DateRange {
-  return Datex.getMonthRange(this.date, durationMonth, doSplitWeek);
-}
 
-static getMonthRange(date:Date|Datex, durationMonth?:number, doSplitWeek?:boolean): DateRange {
-  durationMonth = durationMonth || 1;
-  var result;
-  if(durationMonth < 0){
-    result = {
-      startDate: Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth)),
-      endDate: Datex.getLastDayOfMonth(date)
-    }
-  }else{
-    result = {
-      startDate: Datex.getFirstDayOfMonth(date),
-      endDate: Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth-1))
-    }
-  }
-
-  if(doSplitWeek){
-    splitWeek(result);
-  }
-
-  return dateRangeWithFunc(result);
-}
-
-getFullMonthRange(durationMonth?:number, doSplitWeek?:boolean): DateRange{
-  return Datex.getFullMonthRange(this.date, durationMonth, doSplitWeek);
-}
-
-static getFullMonthRange(date:Date, durationMonth?:number, doSplitWeek?:boolean): DateRange{
-  durationMonth = durationMonth || 1;
-  var result;
-  if(durationMonth < 0){
-    result = {
-      startDate: Datex.setFirstDayOfWeek(Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth))),
-      endDate: Datex.setLastDayOfWeek(Datex.getLastDayOfMonth(date))
-    }
-  }else{
-    result = {
-      startDate: Datex.setFirstDayOfWeek(Datex.getFirstDayOfMonth(date)),
-      endDate: Datex.setLastDayOfWeek(Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth-1)))
-    }
-  }
-
-  if(doSplitWeek){
-    splitWeek(result);
-  }
-
-  return dateRangeWithFunc(result);
-}
 
 function splitWeek(dateRange:DateRange): DateRange {
   var arr = [], t, et, endDate;
@@ -249,31 +199,31 @@ export default class Datex extends Date {
     return Datex.getUTCMonthName(this, min, lang);
   }
 
-  static getUTCMonthName(date:Date, min:boolean=false, lang:string="en"): string {
+  static getUTCMonthName(date:Date|Datex, min:boolean=false, lang:string="en"): string {
     return monthnames[min?"min":"normal"][lang][date.getUTCMonth()];
   }
 
-  getWeekRange(durationWeek?:number|Date, splitWeek?:boolean): DateRange {
+  getWeekRange(durationWeek?:number|Date|Datex, splitWeek?:boolean): DateRange {
     return Datex.getWeekRange(this, durationWeek, splitWeek);
   }
 
-  static getWeekRange(date:Date|Datex, durationWeek?:number|Date, doSplitWeek?:boolean): DateRange {
+  static getWeekRange(date:Date|Datex, durationWeek?:number|Date|Datex, doSplitWeek?:boolean): DateRange {
     var result;
-    if(durationWeek instanceof Date || durationWeek instanceof Datex){
+    if(durationWeek as any instanceof Date || durationWeek as any instanceof Datex){
       result = {
         startDate: Datex.getFirstDayOfMonth(date),
-        endDate: Datex.getLastDayOfWeek(durationWeek)
+        endDate: Datex.getLastDayOfWeek(durationWeek as Date)
       }
     }else{
       durationWeek = durationWeek || 1;
       if(durationWeek > 0){
         result = {
           startDate: Datex.getFirstDayOfWeek(date),
-          endDate: Datex.setLastDayOfWeek(Datex.getOffsetWeek(date, durationWeek-1))//offset(getLastSunday(date), 6 + (7 * (durationWeek-1)))
+          endDate: Datex.setLastDayOfWeek(Datex.getOffsetWeek(date, durationWeek as number - 1))//offset(getLastSunday(date), 6 + (7 * (durationWeek-1)))
         }
       }else{
         result = {
-          startDate: Datex.setFirstDayOfWeek(Datex.getOffsetWeek(date, durationWeek)),
+          startDate: Datex.setFirstDayOfWeek(Datex.getOffsetWeek(date, durationWeek as number)),
           endDate: Datex.getLastDayOfWeek(date)
         }
       }
@@ -289,10 +239,10 @@ export default class Datex extends Date {
 
 
   toSimpleString(): string{
-    return Datex.getSimpleDateString(this.date);
+    return Datex.getSimpleDateString(this);
   }
 
-  static getSimpleDateString(date:Date): string{
+  static getSimpleDateString(date:Date|Datex): string{
     //아래처럼하면 0시0분에 이전 날짜를 보여주는 오류
     //return d.toJSON().substr(0,10);
     //return [date.getFullYear(), ("0"+(date.getMonth()+1)).substr(-2), ("0"+date.getDate()).substr(-2)].join("-");
@@ -308,7 +258,7 @@ export default class Datex extends Date {
     return this;
   }
 
-  static timereset(date:Date): Date {
+  static timereset(date:Date|Datex): Date {
     //Datex.dayms = 1000 * 60 * 60 * 24 //1day time
     //date.setTime(Math.floor((date.getTime() - Datex.timezoneOffset) / Datex.dayms) * Datex.dayms + Datex.timezoneOffset);
     date.setTime(Datex.getResetTime(date.getTime()));
@@ -323,7 +273,7 @@ export default class Datex extends Date {
     return Datex.getWeekCount(this);
   }
 
-  static getWeekCount(date:Date): number {
+  static getWeekCount(date:Date|Datex): number {
     var first = new Date(date.getFullYear(),0,1);
     // var numday = ((this.date.getTime() - first.getTime()) / dayms);
     return Math.ceil((((date.getTime() - first.getTime()) / dayms) + first.getDay()+1) / 7);
@@ -343,13 +293,13 @@ export default class Datex extends Date {
     // return this.clone().setDate(this.date.getDate() + day);
   }
 
-  static setOffset(date:Date, day:number): Date {
+  static setOffset(date:Date|Datex, day:number): Date {
     if(!day) return date;
     date.setDate(date.getDate() + day);
     return date;
   }
 
-  static getOffset(date:Date, day:number): Date {
+  static getOffset(date:Date|Datex, day:number): Date {
     return Datex.setOffset(new Date(date.getTime()), day);
   }
 
@@ -365,12 +315,12 @@ export default class Datex extends Date {
     // return this.getOffset(week * 7);
   }
 
-  static setOffsetWeek(date:Date, week:number): Date {
+  static setOffsetWeek(date:Date|Datex, week:number): Date {
     if(!week) return date;
     return Datex.setOffset(date, week * 7);
   }
 
-  static getOffsetWeek(date:Date, week:number): Date {
+  static getOffsetWeek(date:Date|Datex, week:number): Date {
     return Datex.getOffset(date, week * 7);
   }
 
@@ -392,7 +342,7 @@ export default class Datex extends Date {
     return this.clone().setOffsetMonth(month);
   }
 
-  static setOffsetMonth(date:Date, month:number): Date {
+  static setOffsetMonth(date:Date|Datex, month:number): Date {
     if(!month) return date;
     var tm = date.getFullYear() * 12 + date.getMonth();
     date.setMonth(date.getMonth()+ month);
@@ -405,7 +355,7 @@ export default class Datex extends Date {
     return date;
   }
 
-  static getOffsetMonth(date:Date, month:number): Date {
+  static getOffsetMonth(date:Date|Datex, month:number): Date {
     return Datex.setOffsetMonth(new Date(date.getTime()), month);
   }
 
@@ -421,12 +371,12 @@ export default class Datex extends Date {
     // return this;
   }
 
-  static setFirstDayOfWeek(date:Date): Date {
+  static setFirstDayOfWeek(date:Date|Datex): Date {
     date.setDate(date.getDate() - date.getDay());
     return date;
   }
 
-  static getFirstDayOfWeek(date:Date): Date {
+  static getFirstDayOfWeek(date:Date|Datex): Date {
     return Datex.setFirstDayOfWeek(new Date(date.getTime()));
   }
 
@@ -439,11 +389,11 @@ export default class Datex extends Date {
     return this.clone().setFirstDayOfWeek();
   }
 
-  static setSunday(date:Date): Date {
+  static setSunday(date:Date|Datex): Date {
     return Datex.setFirstDayOfWeek(date);
   }
 
-  static getSunday(date:Date): Date {
+  static getSunday(date:Date|Datex): Date {
     return Datex.getFirstDayOfWeek(date);
   }
 
@@ -456,13 +406,13 @@ export default class Datex extends Date {
     return this.clone().setMonday();
   }
 
-  static setMonday(date:Date): Date {
+  static setMonday(date:Date|Datex): Date {
     //date.setDate(date.getDate() - date.getDay() + 1);
     Datex.setOffset(Datex.setFirstDayOfWeek(date), 1);
     return date;
   }
 
-  static getMonday(date:Date): Date {
+  static getMonday(date:Date|Datex): Date {
     //return new Date(date.getDate() - date.getDay() + 1);
     return Datex.setOffset(Datex.getFirstDayOfWeek(date), 1);
   }
@@ -476,12 +426,12 @@ export default class Datex extends Date {
     return this.clone().setTuesday();
   }
 
-  static setTuesday(date:Date): Date {
+  static setTuesday(date:Date|Datex): Date {
     Datex.setOffset(Datex.setFirstDayOfWeek(date), 2);
     return date;
   }
 
-  static getTuesday(date:Date): Date {
+  static getTuesday(date:Date|Datex): Date {
     return Datex.setOffset(Datex.getFirstDayOfWeek(date), 2);
   }
 
@@ -494,12 +444,12 @@ export default class Datex extends Date {
     return this.clone().setWednesday();
   }
 
-  static setWednesday(date:Date): Date {
+  static setWednesday(date:Date|Datex): Date {
     Datex.setOffset(Datex.setFirstDayOfWeek(date), 3);
     return date;
   }
 
-  static getWednesday(date:Date): Date {
+  static getWednesday(date:Date|Datex): Date {
     return Datex.setOffset(Datex.getFirstDayOfWeek(date), 3);
   }
 
@@ -512,12 +462,12 @@ export default class Datex extends Date {
     return this.clone().setThursday();
   }
 
-  static setThursday(date:Date): Date {
+  static setThursday(date:Date|Datex): Date {
     Datex.setOffset(Datex.setFirstDayOfWeek(date), 4);
     return date;
   }
 
-  static getThursday(date:Date): Date {
+  static getThursday(date:Date|Datex): Date {
     return Datex.setOffset(Datex.getFirstDayOfWeek(date), 4);
   }
 
@@ -530,12 +480,12 @@ export default class Datex extends Date {
     return this.clone().setFriday();
   }
 
-  static setFriday(date:Date): Date {
+  static setFriday(date:Date|Datex): Date {
     Datex.setOffset(Datex.setFirstDayOfWeek(date), 5);
     return date;
   }
 
-  static getFriday(date:Date): Date {
+  static getFriday(date:Date|Datex): Date {
     return Datex.setOffset(Datex.getFirstDayOfWeek(date), 5);
   }
 
@@ -548,11 +498,11 @@ export default class Datex extends Date {
     return this.clone().setLastDayOfWeek();
   }
 
-  static setSaturday(date:Date): Date {
+  static setSaturday(date:Date|Datex): Date {
     return Datex.setLastDayOfWeek(date);
   }
 
-  static getSaturday(date:Date): Date {
+  static getSaturday(date:Date|Datex): Date {
     return Datex.getLastDayOfWeek(date);
   }
 
@@ -568,12 +518,12 @@ export default class Datex extends Date {
     // return this;
   }
 
-  static setLastDayOfWeek(date:Date): Date {
+  static setLastDayOfWeek(date:Date|Datex): Date {
     date.setDate(date.getDate() + 6 - date.getDay());
     return date;
   }
 
-  static getLastDayOfWeek(date:Date): Date {
+  static getLastDayOfWeek(date:Date|Datex): Date {
     return Datex.setLastDayOfWeek(new Date(date.getTime()));
   }
 
@@ -589,12 +539,12 @@ export default class Datex extends Date {
     // return this;
   }
 
-  static setFirstDayOfMonth(date:Date): Date {
+  static setFirstDayOfMonth(date:Date|Datex): Date {
     date.setDate(1);
     return date
   }
 
-  static getFirstDayOfMonth(date:Date): Date {
+  static getFirstDayOfMonth(date:Date|Datex): Date {
     return Datex.setFirstDayOfMonth(new Date(date.getTime()));
   }
 
@@ -610,12 +560,12 @@ export default class Datex extends Date {
     // return this;
   }
 
-  static setLastDayOfMonth(date:Date): Date {
+  static setLastDayOfMonth(date:Date|Datex): Date {
     Datex.setOffsetMonth(date, 1).setDate(0);
     return date;
   }
 
-  static getLastDayOfMonth(date:Date): Date {
+  static getLastDayOfMonth(date:Date|Datex): Date {
     return Datex.setLastDayOfMonth(new Date(date.getTime()));
   }
 
@@ -623,7 +573,7 @@ export default class Datex extends Date {
     return Datex.isLeapYear(this);
   }
 
-  static isLeapYear(date:Date): boolean {
+  static isLeapYear(date:Date|Datex): boolean {
     return date.getFullYear() % 4 == 0;
   }
 
@@ -631,7 +581,7 @@ export default class Datex extends Date {
     return Datex.isSunday(this);
   }
 
-  static isSunday(date:Date) : boolean {
+  static isSunday(date:Date|Datex) : boolean {
     return date.getDay() == 0;
   }
 
@@ -639,7 +589,7 @@ export default class Datex extends Date {
     return Datex.isMonday(this);
   }
 
-  static isMonday(date:Date) : boolean {
+  static isMonday(date:Date|Datex) : boolean {
     return date.getDay() == 1;
   }
 
@@ -647,7 +597,7 @@ export default class Datex extends Date {
     return Datex.isTuesday(this);
   }
 
-  static isTuesday(date:Date) : boolean {
+  static isTuesday(date:Date|Datex) : boolean {
     return date.getDay() == 2;
   }
 
@@ -655,7 +605,7 @@ export default class Datex extends Date {
     return Datex.isWednesday(this);
   }
 
-  static isWednesday(date:Date) : boolean {
+  static isWednesday(date:Date|Datex) : boolean {
     return date.getDay() == 3;
   }
 
@@ -663,7 +613,7 @@ export default class Datex extends Date {
     return Datex.isThursday(this);
   }
 
-  static isThursday(date:Date) : boolean {
+  static isThursday(date:Date|Datex) : boolean {
     return date.getDay() == 4;
   }
 
@@ -671,7 +621,7 @@ export default class Datex extends Date {
     return Datex.isFriday(this);
   }
 
-  static isFriday(date:Date) : boolean {
+  static isFriday(date:Date|Datex) : boolean {
     return date.getDay() == 5;
   }
 
@@ -679,8 +629,61 @@ export default class Datex extends Date {
     return Datex.isSaturday(this);
   }
 
-  static isSaturday(date:Date): boolean{
+  static isSaturday(date:Date|Datex): boolean{
     return date.getDay() == 6;
+  }
+
+
+  getMonthRange(durationMonth?:number, doSplitWeek?:boolean): DateRange {
+    return Datex.getMonthRange(this, durationMonth, doSplitWeek);
+  }
+
+  static getMonthRange(date:Date|Datex, durationMonth?:number, doSplitWeek?:boolean): DateRange {
+    durationMonth = durationMonth || 1;
+    var result;
+    if(durationMonth < 0){
+      result = {
+        startDate: Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth)),
+        endDate: Datex.getLastDayOfMonth(date)
+      }
+    }else{
+      result = {
+        startDate: Datex.getFirstDayOfMonth(date),
+        endDate: Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth-1))
+      }
+    }
+
+    if(doSplitWeek){
+      splitWeek(result);
+    }
+
+    return dateRangeWithFunc(result);
+  }
+
+  getFullMonthRange(durationMonth?:number, doSplitWeek?:boolean): DateRange{
+    return Datex.getFullMonthRange(this, durationMonth, doSplitWeek);
+  }
+
+  static getFullMonthRange(date:Date, durationMonth?:number, doSplitWeek?:boolean): DateRange{
+    durationMonth = durationMonth || 1;
+    var result;
+    if(durationMonth < 0){
+      result = {
+        startDate: Datex.setFirstDayOfWeek(Datex.setFirstDayOfMonth(Datex.getOffsetMonth(date, durationMonth))),
+        endDate: Datex.setLastDayOfWeek(Datex.getLastDayOfMonth(date))
+      }
+    }else{
+      result = {
+        startDate: Datex.setFirstDayOfWeek(Datex.getFirstDayOfMonth(date)),
+        endDate: Datex.setLastDayOfWeek(Datex.setLastDayOfMonth(Datex.getOffsetMonth(date, durationMonth-1)))
+      }
+    }
+
+    if(doSplitWeek){
+      splitWeek(result);
+    }
+
+    return dateRangeWithFunc(result);
   }
 
   /////////////////////////////////////////

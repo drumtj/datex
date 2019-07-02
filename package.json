@@ -1,5 +1,5 @@
 {
-  "name": "@tj/datex",
+  "name": "@drumtj/datex",
   "version": "1.0.2",
   "description": "extension Date class",
   "main": "./dist/datex.umd.js",
