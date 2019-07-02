@@ -1,6 +1,6 @@
 {
   "name": "@drumtj/datex",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "extension Date class",
   "main": "./dist/datex.umd.js",
   "scripts": {
