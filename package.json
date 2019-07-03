@@ -8,8 +8,8 @@
     "enable-2fa": "npm profile enable-2fa auth-only",
     "release": "npm run build && npm run deploy && np --no-cleanup --yolo --no-release-draft",
     "_release": "npm run build && npm run deploy",
-    "deploy": "git add -A && git commit -m 'deploy' && git push origin master",
-    "deploy2": "git add -A && git commit -m 'deploy' && git push origin master && git subtree push --prefix examples origin gh-pages",
+    "deploy": "git add -A && git commit -m 'deploy' && git subtree push --prefix examples origin gh-pages",
+    "_deploy": "git add -A && git commit -m 'deploy' && git push origin master",
     "pull": "git pull origin master --allow-unrelated-histories",
     "deploy_test": "git add -A && git commit -m 'deploy' && git pull origin master --allow-unrelated-histories && git push origin master////git subtree split --prefix examples master:gh-pages --force",
     "_deploy": "git add -f dist && git commit -m 'deploy' && git push origin `git subtree split --prefix dist master`:gh-pages --force && git rm -r dist && git commit -m 'cleanup deploy'"

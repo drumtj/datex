@@ -101,8 +101,9 @@ dx.format("YYYY년 M월 D일 (DDD)", "ko"); // 2019년 7월 2일 (화)
 dx.format("YYYY년 MM월 DD일 (DDDD)", "ko"); // 2019년 07월 02일 (화요일)
 ```
 
-Please check the example folder for more [examples](https://github.com/drumtj/datex/tree/master/examples).
-
+examples ([source](https://github.com/drumtj/datex/tree/master/examples))
+- [method test log](https://drumtj.github.io/datex/log.html)
+- [calendar](https://drumtj.github.io/datex/calendar.html)
 ## License
 
 MIT
