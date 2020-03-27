@@ -705,23 +705,113 @@ export default class Datex extends Date {
 
 
   static format(date, f="YYYY-MM-DD", lang="en"):string{
-  	return f
-    .replace(/hh/g, ('0' + date.getHours()).substr(-2))
-    .replace(/h/g, date.getHours().toString())
-    .replace(/mm/g, ('0' + date.getMinutes()).substr(-2))
-    .replace(/m/g, date.getMinutes().toString())
-    .replace(/ss/g, ('0' + date.getSeconds()).substr(-2))
-    .replace(/s/g, date.getSeconds().toString())
-  	.replace(/YYYY/g, date.getFullYear().toString())
-  	.replace(/YY/g, (date.getFullYear() % 100).toString())
-  	.replace(/MMMM/g, Datex.getMonthName(date, false, lang))
-  	.replace(/MMM/g, Datex.getMonthName(date, true, lang))
-  	.replace(/MM/g, ('0' + (date.getMonth() + 1)).substr(-2))
-  	.replace(/M/g, (date.getMonth() + 1).toString())
-  	.replace(/DDDD/g, Datex.getDayName(date, false, lang))
-  	.replace(/DDD/g, Datex.getDayName(date, true, lang))
-  	.replace(/DD/g, ('0' + date.getDate()).substr(-2))
-  	.replace(/D/g, date.getDate().toString())
+  	// return f
+    // .replace(/hh/g, ('0' + date.getHours()).substr(-2))
+    // .replace(/h/g, date.getHours().toString())
+    // .replace(/mm/g, ('0' + date.getMinutes()).substr(-2))
+    // .replace(/m/g, date.getMinutes().toString())
+    // .replace(/ss/g, ('0' + date.getSeconds()).substr(-2))
+    // .replace(/s/g, date.getSeconds().toString())
+  	// .replace(/YYYY/g, date.getFullYear().toString())
+  	// .replace(/YY/g, (date.getFullYear() % 100).toString())
+  	// .replace(/MMMM/g, Datex.getMonthName(date, false, lang))
+  	// .replace(/MMM/g, Datex.getMonthName(date, true, lang))
+  	// .replace(/MM/g, ('0' + (date.getMonth() + 1)).substr(-2))
+  	// .replace(/M/g, (date.getMonth() + 1).toString())
+  	// .replace(/DDDD/g, Datex.getDayName(date, false, lang))
+  	// .replace(/DDD/g, Datex.getDayName(date, true, lang))
+  	// .replace(/DD/g, ('0' + date.getDate()).substr(-2))
+  	// .replace(/D/g, date.getDate().toString())
+
+    let list = {}, k = '∼', kc=0;
+    function getKey(found){
+      return k+(kc++)+k;
+    }
+    f = f.replace(/hh/g, function(found){
+      let key = getKey(found);
+      list[key] = ('0' + date.getHours()).substr(-2);
+      return key;
+    })
+    .replace(/h/g, function(found){
+      let key = getKey(found);
+      list[key] = date.getHours().toString();
+      return key;
+    })
+    .replace(/mm/g, function(found){
+      let key = getKey(found);
+      list[key] = ('0' + date.getMinutes()).substr(-2)
+      return key;
+    })
+    .replace(/m/g, function(found){
+      let key = getKey(found);
+      list[key] = date.getMinutes().toString();
+      return key;
+    })
+    .replace(/ss/g, function(found){
+      let key = getKey(found);
+      list[key] = ('0' + date.getSeconds()).substr(-2);
+      return key;
+    })
+    .replace(/s/g, function(found){
+      let key = getKey(found);
+      list[key] = date.getSeconds().toString();
+      return key;
+    })
+  	.replace(/YYYY/g, function(found){
+      let key = getKey(found);
+      list[key] = date.getFullYear().toString();
+      return key;
+    })
+  	.replace(/YY/g, function(found){
+      let key = getKey(found);
+      list[key] = (date.getFullYear() % 100).toString();
+      return key;
+    })
+  	.replace(/MMMM/g, function(found){
+      let key = getKey(found);
+      list[key] = Datex.getMonthName(date, false, lang);
+      return key;
+    })
+  	.replace(/MMM/g, function(found){
+      let key = getKey(found);
+      list[key] = Datex.getMonthName(date, true, lang);
+      return key;
+    })
+  	.replace(/MM/g, function(found){
+      let key = getKey(found);
+      list[key] = ('0' + (date.getMonth() + 1)).substr(-2);
+      return key;
+    })
+  	.replace(/M/g, function(found){
+      let key = getKey(found);
+      list[key] = (date.getMonth() + 1).toString();
+      return key;
+    })
+  	.replace(/DDDD/g, function(found){
+      let key = getKey(found);
+      list[key] = Datex.getDayName(date, false, lang);
+      return key;
+    })
+  	.replace(/DDD/g, function(found){
+      let key = getKey(found);
+      list[key] = Datex.getDayName(date, true, lang);
+      return key;
+    })
+  	.replace(/DD/g, function(found){
+      let key = getKey(found);
+      list[key] = ('0' + date.getDate()).substr(-2);
+      return key;
+    })
+  	.replace(/D/g, function(found){
+      let key = getKey(found);
+      list[key] = date.getDate().toString();
+      return key;
+    })
+
+    for(let o in list){
+      f = f.replace(new RegExp(o, 'g'), list[o]);
+    }
+    return f;
   }
 
   format(f?, lang?):string{

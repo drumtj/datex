@@ -24,7 +24,7 @@ $ npm install @drumtj/datex
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/@drumtj/datex@1.0.10/dist/datex.js"></script>
+<script src="https://unpkg.com/@drumtj/datex@1.0.12/dist/datex.js"></script>
 ```
 
 Using amd, commonjS Module
